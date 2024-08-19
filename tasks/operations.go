@@ -23,7 +23,7 @@ func Add(desc string) error {
 	return StoreTasks(tasks)
 }
 
-func Update(taskId, content string) ([]Task, error) {
+func Update(taskId, column string, content string) ([]Task, error) {
 	tasks, err := LoadTasks()
 	if err != nil {
 		return nil, fmt.Errorf("unable to update task: %v", err)
@@ -39,7 +39,14 @@ func Update(taskId, content string) ([]Task, error) {
 		return nil, err
 	}
 
-	task.Description = content
+	switch column {
+	case "status":
+		task.Status = content
+	case "description":
+		task.Description = content
+	default:
+		return nil, fmt.Errorf("Invalid column name: %s", column)
+	}
 	task.UpdatedAt = time.Now().String()
 
 	for i, t := range tasks {

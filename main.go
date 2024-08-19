@@ -23,7 +23,7 @@ func main() {
 		tasks.ErrorArgsCheck("Please provide a task ID and description.", 4)
 		taskId := os.Args[2]
 		newDescription := os.Args[3]
-		if _, err := tasks.Update(taskId, newDescription); err != nil {
+		if _, err := tasks.Update(taskId, "description", newDescription); err != nil {
 			fmt.Println("Error updating task:", err)
 			os.Exit(1)
 		}
@@ -49,6 +49,24 @@ func main() {
 		for _, task := range tasks {
 			fmt.Printf("ID: %d, Description: %s, Status: %s\n", task.ID, task.Description, task.Status)
 		}
+	case "mark-in-progress":
+		tasks.ErrorArgsCheck("Please provide a task ID and description.", 3)
+		newStatus := "in-progress"
+		taskId := os.Args[2]
+		if _, err := tasks.Update(taskId, "status", newStatus); err != nil {
+			fmt.Println("Error updating task:", err)
+			os.Exit(1)
+		}
+		fmt.Println("Task marked as in-progress")
+	case "mark-done":
+		tasks.ErrorArgsCheck("Please provide a task ID and description.", 3)
+		newStatus := "done"
+		taskId := os.Args[2]
+		if _, err := tasks.Update(taskId, "status", newStatus); err != nil {
+			fmt.Println("Error updating task:", err)
+			os.Exit(1)
+		}
+		fmt.Println("Task marked as done")
 	default:
 		fmt.Println("Unknown command")
 		os.Exit(1)
