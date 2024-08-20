@@ -81,7 +81,9 @@ func Delete(taskId string) error {
 			break
 		}
 	}
-
+	if index == -1 {
+		return fmt.Errorf("task not found : %v 404", id)
+	}
 	tasks = append(tasks[:index], tasks[index+1:]...)
 
 	return StoreTasks(tasks)
