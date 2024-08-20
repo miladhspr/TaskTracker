@@ -2,6 +2,11 @@
 
 Task Tracker is a command-line interface (CLI) application for managing tasks. It allows you to add, update, delete, mark tasks as in progress or done, and list tasks based on their status.
 
+## Description
+im using 2 ways to implement cli app and put in 2 branches
+- main branch go native cli
+- cobra-cli branch using cobra to implement cli
+
 ## Features
 - **Add**: Add a new task with a description and a default status of "todo",
 - **List**: View tasks based on their status (todo, in progress, done, or all).
